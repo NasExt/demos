@@ -3,6 +3,7 @@
 namespace App;
 use Model;
 use NasExt\Forms\Controls\Range;
+use NasExt\Forms\Controls\RangeSlider;
 use Nette;
 
 
@@ -31,8 +32,8 @@ class HomepagePresenter extends BasePresenter
 			->setAttribute('data-custom-init', Nette\Utils\Json::encode(array('step'=>2)))
 			->setDefaultValue(new Range(15, 66))
 			->addRule($form::FILLED, 'Please complete mandatory field')
-			->addRule($form::INTEGER, 'Please enter a numeric value')
-			->addRule($form::RANGE, 'Please enter a value between %d and %d', $range->getRange());
+			->addRule(RangeSlider::INTEGER, 'Please enter a numeric value')
+			->addRule(RangeSlider::RANGE, 'Please enter a value between %d and %d', $range->getRange());
 
 		$form->addSubmit('send');
 		$form->onSuccess[] = callback($this, 'formSubmitted');
